@@ -26,6 +26,9 @@ def get_from_ipfs(cid,content_type="json"):
 		'pinata_secret_apikey: a1d3e4dea02a3d298cc71a05669b098c747f801276df39ba9d355f8464c9cdb5'
     }
 	response = requests.get(url, headers=headers)
-	data = response.json() if content_type == "json" else response.content
+	if content_type == "json":
+		data = response.json() 
+	else:
+		response.content
 	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
 	return data
