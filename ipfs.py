@@ -8,24 +8,24 @@ def pin_to_ipfs(data):
 	files = {
 		'file': ('data.json', json_data, 'application/json')
   }
-	url = "https://api.pinata.cloud/pinning/pinFileToIPFS"
+	gateway = "https://api.pinata.cloud/pinning/pinFileToIPFS"
 	headers = {
-		'pinata_apikey': '37e6ad229f4345d03996',
-		'pinata_secret_apikey': 'a1d3e4dea02a3d298cc71a05669b098c747f801276df39ba9d355f8464c9cdb5'
+		'pinata_api_key': '37e6ad229f4345d03996',
+		'pinata_secret_api_key': 'a1d3e4dea02a3d298cc71a05669b098c747f801276df39ba9d355f8464c9cdb5'
   }
-	response = requests.post(url, files = files, headers=headers)
+	response = requests.post(gateway, files = files, headers=headers)
 	cid = response.json()["IpfsHash"]
 	return cid
 	
 def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
 	#YOUR CODE HERE	
-	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
+	gateway = f"https://gateway.pinata.cloud/ipfs/{cid}"
 	headers = {
-		'pinata_apikey': '37e6ad229f4345d03996',
-		'pinata_secret_apikey': 'a1d3e4dea02a3d298cc71a05669b098c747f801276df39ba9d355f8464c9cdb5'
+		'pinata_api_key': '37e6ad229f4345d03996',
+		'pinata_secret_api_key': 'a1d3e4dea02a3d298cc71a05669b098c747f801276df39ba9d355f8464c9cdb5'
     }
-	response = requests.get(url, headers=headers)
+	response = requests.get(gateway, headers=headers)
 	if content_type == "json":
 		data = response.json() 
 	else:
